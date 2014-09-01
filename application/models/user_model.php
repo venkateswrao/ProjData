@@ -19,4 +19,10 @@ function check_user($email,$pass){
 	}
 }
 
+function edit_profile($id){
+$query1=$this->db->get_where('cust_data',array('id'=>$id));
+$data1=$query1->result_array();
+
+return $data1;
+}
 }

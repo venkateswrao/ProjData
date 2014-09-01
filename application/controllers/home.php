@@ -7,16 +7,21 @@ class Home extends CI_Controller{
 		//$this->load->helper(array('form', 'url'));
 		parent::__construct();
 		
+	
 		
 		$this->load->model('user_model');
+		
 		
 	}
 
 function index(){
 	if($this->session->userdata('username')){
+		
 		$data['sessiondata']=$this->session->userdata('username');
+		$this->load->view('userdashboard',$data);
 	}else 
 	{
+		
 		$this->load->view('templet');
 	}
 	
@@ -84,5 +89,13 @@ function index(){
  			$this->load->view('login',$data);
  		}		
  		}
- 	
+ 		function logout(){
+ 			$this->session->sess_destroy();
+ 			
+ 			$this->load->view('login');
+ 		}
+ 	function editprofile($id){
+ 		$d1['res']=$this->user_model->edit_profile($id);
+ 		$this->load->view('profile',$d1);
+ 	}
 }

@@ -1,3 +1,10 @@
+<?php
+$sess_data=$this->session->userdata('username');
+
+if(!$sess_data){
+	redirect('home','refresh');
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,58 +29,7 @@
      
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	
-		$("#reg").submit(function(){
-			
-    $(".error").hide();
-	var fname=$('#fname').val();	
-	var lname=$('#lname').val();
-	var email=$('#email').val();
-	var filter= /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-	var pass=$('#pass').val();
-	var rpass=$('#rpass').val();
-	var date=$('#date').val();
-	var gender=$('#sex').val();
-	var phno=$('#phno').val();
-	var location=$('#country').val();
-	var pic=$('#pic').val();
-	if(fname==""){
-		 $("#fname").after('<span class="error" style="color:red ">Please enter your firstname.</span>');
-	        hasError = true;
-			 $('#fname').focus();
-			return false;
-			}else
-	if(lname==""){
-		 $("#lname").after('<span class="error" style="color:red ">Please enter your lastname.</span>');
-	        hasError = true;
-			 $('#lname').focus();
-			return false;
-			}else
-				if(email==""){
-					$("#email").after('<span class="error" style="color:red ">Please enter your email address.</span>');
-					 hasError = true;
-					 $('#email').focus();
-					return false;
-				    }else if (!filter.test(email)) {
-				    	 $("#email").after('<span class="error" style="color:red ">Please enter a valid email address.</span>');
-				         hasError = true;
-							 $('#email').focus();
-						    return false;
-							 }
-						else if(pass==""){
-							 $("#pass").after('<span class="error" style="color:red ">Please enter your password.</span>');
-						        hasError = true;
-						 $('#pass').focus();
-						return false;
-						}
-						else if(rpass==""){
-							$("#rpass").after('<span class="error" style="color:red ">Please enter your conform password.</span>');
-						}
-	return true;
-	
-	});
-	});
+
 </script>
 </head><!--/head-->
 <body>
@@ -90,21 +46,25 @@ $(document).ready(function(){
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <li><a href="<?php echo base_url();?>home/log_in">Login</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="icon-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                        <li><a href="register.php">Registration</a></li>
-                            <li><a href="login.php">Login</a></li>
-                            
-                        </ul>
+                <?php if($sess_data['id']){?>
+		   <li class='active'><a href='<?php echo base_url();?>home/dashboard'><span><?php echo $sess_data['fname']."'s "."Dashboard";?></span></a>
+                                   <?php }else {?>
+                   </li>
+                  <li class='active'><a href='<?php echo base_url();?>home'><span>Signup</span></a>                   
+                    <?php }?>
                     </li>
-                    <li><a href="#">Blog</a></li> 
-                    <li><a href="#">Contact</a></li>
-                </ul>
+                   <?php if($sess_data['id']){?>
+                    <li class='has-sub'><a href='<?php echo base_url();?>home/logout'><span>Logout</span></a></li>
+		    <?php
+		   		}else{?>
+				 <li class='has-sub'><a href='<?php echo base_url();?>home/login'><span>Login</span></a></li>
+				<?php
+				}?>
+		  <li class='has-sub'><a href='<?php echo base_url();?>home/user'><span>Users</span></a></li>
+		   <div class="clear"></div>
+		 </ul> 
+                   
+              
             </div>
         </div>
     </header><!--/header-->
@@ -113,77 +73,21 @@ $(document).ready(function(){
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>Registration</h1>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
+                    
                 </div>
                 <div class="col-sm-6">
                     <ul class="breadcrumb pull-right">
-                        <li><a href="<?php echo base_url();?>">Home</a></li>
-                        <li><a href="#">Pages</a></li>
-                        <li class="active">Registration</li>
+                        <?php $id=$sess_data['id'];?>
+		<?php echo "Welcome_". $sess_data['fname'];;?>
+		<a href='<?php echo base_url();?>home/editprofile/<?php echo $id;?>'><span>Edit Profile</span></a>
+	</div>
                     </ul>
                 </div>
             </div>
         </div>
     </section><!--/#title-->     
 
-    <section id="registration" class="container">
-        <table border="0" align="center">
-<form action="<?php echo base_url();?>home/getdetails" id="reg" method="post" enctype="multipart/form-data">
-<tr>
-<td><label>FirstName:</label></td>
-<td><input type="text" name="fname" id="fname" class="form-control"></td>
-</tr>
-<tr>
-<td><label>LastName:</label></td>
-<td><input type="text" name="lname" id="lname" class="form-control"></td>
-</tr>
-<tr>
-<td><label>Email:</label></td>
-<td><input type="text" name="email" id="email" class="form-control"></td>
-</tr>
-<tr>
-<td><label>PassWord:</label></td>
-<td><input type="password" name="pass" id="pass" class="form-control"></td>
-</tr>
-<tr>
-<td><label>Confirm a PassWord:</label></td>
-<td><input type="password" name="rpass" id="rpass" class="form-control"></td>
-</tr>
-<tr>
-<td><label>Birth Date:</label></td>
-<td><input type="date" name="date" id="date" class="input-append date" ></td>
-</tr>
-<tr>
-<td><label>Gender:</label></td>
-<td><input type="radio" name="gender" id="gender" value="male" class="btn btn-success">male
-<input type="radio" name="gender" id="gender" value="female" class="btn btn-success">female</td>
-</tr>	
-<tr>
-<td><label>Mobile Number:</label></td>
-<td><input type="text" name="phno" id="phno" class="form-control"></td>
-</tr>
-<tr>
-<td><label>Location:</label></td>
-<td>
-<select name="country" id="country" class="btn dropdown-toggle">
-<option value="ind">India</option>
-<option value="aus">Aus</option>
-<option value="usa">Usa</option>
-</select></td>
-</tr>
-<tr>
-<td><label>Profile Pic:</label></td>
-<td><input type="file" name="pic" id="pic"></td>
-</tr>
-<tr>
-<td></td>
-<td align="center"><input id="button" type="submit" name="submit" value="Sign-Up" class="btn btn-success"></td>
-</tr>
-</form>
-</table>
-    </section><!--/#registration-->
-
+    
     <section id="bottom" class="wet-asphalt">
         <div class="container">
             <div class="row">
@@ -274,7 +178,7 @@ $(document).ready(function(){
                 <div class="col-sm-6">
                     <ul class="pull-right">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">LogOut Us</a></li>
                         <li><a href="#">Faq</a></li>
                         <li><a href="#">Contact Us</a></li>
                         <li><a id="gototop" class="gototop" href="#"><i class="icon-chevron-up"></i></a></li><!--#gototop-->
