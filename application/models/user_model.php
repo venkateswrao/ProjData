@@ -25,4 +25,38 @@ $data1=$query1->result_array();
 
 return $data1;
 }
+function edit_user(){
+	
+	 $data1['id']=$this->input->post('id');
+     $data1['fname']=$this->input->post('fname');
+	 $data1['lname']=$this->input->post('lname');
+	 $data1['email']=$this->input->post('email');
+	 $data1['phoneno']=$this->input->post('phno');
+	 $data1['pass']=$this->input->post('rpwd');
+	
+	
+	$data=array('fname'=>$data1['fname'],
+	             'lname'=>$data1['lname'],
+	              'email'=>$data1['email'],
+	              'pass'=>$data1['pass'],
+                   'phoneno'=>$data1['phoneno']);
+	$this->db->where('id',$data1['id']);
+	$this->db->update('cust_data',$data);
+	return true;
+	
+}
+function user($id){
+	$query=$this->db->get_where('cust_data',array('id'=>$id));
+	
+	//$this->db->get('cust_data');
+	//return $query->resut_array();
+	$data=$query->result_array();
+	return $data;
+	
+	
+}
+function delete_user($id){
+	$rq=$this->db->delete('cust_data',array('id'=>$id));
+	return true;
+}
 }

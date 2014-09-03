@@ -1,9 +1,14 @@
 <?php
 $sess_data=$this->session->userdata('username');
-
-if(!$sess_data){
-	redirect('home','refresh');
-} 
+ $sess_data['id'];
+ if(!$sess_data){
+ 	redirect('home','refresh');
+ }
+ if(isset($user)){
+ $cnt=count($user);
+ }
+ 
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +51,7 @@ if(!$sess_data){
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                <?php if($sess_data['id'])
-               { $id=$sess_data['id'];?>
+                <?php if($sess_data['id']){?>
 		   <li class='active'><a href='<?php echo base_url();?>home/dashboard'><span><?php echo $sess_data['fname']."'s "."Dashboard";?></span></a>
                                    <?php }else {?>
                    </li>
@@ -61,7 +65,7 @@ if(!$sess_data){
 				 <li class='has-sub'><a href='<?php echo base_url();?>home/login'><span>Login</span></a></li>
 				<?php
 				}?>
-		  <li class='has-sub'><a href='<?php echo base_url();?>home/user/<?php echo $id?>'><span>UserData</span></a></li>
+		  <li class='has-sub'><a href=''><span>Users</span></a></li>
 		   <div class="clear"></div>
 		 </ul> 
                    
@@ -78,15 +82,29 @@ if(!$sess_data){
                 </div>
                 <div class="col-sm-6">
                     <ul class="breadcrumb pull-right">
-                        
 		<?php echo "Welcome_". $sess_data['fname'];;?>
-		<a href='<?php echo base_url();?>home/editprofile/<?php echo $id;?>'><span>Edit Profile</span></a>
 	</div>
                     </ul>
                 </div>
             </div>
         </div>
     </section><!--/#title-->     
+<?php $id=$sess_data['id'];?>
+	<table style="width:300px;height:200px;border:1px;"><tr><th>Name</th><th></th><th>Email</th><th>Phone NO</th><th>Option</th></tr>
+	<?php 
+	if($cnt==1){
+       ?>
+	<tr><td><?php echo $user[0]['fname'];?></td><td></td><td><?php echo $user[0]['email'];?></td><td><?php echo $user[0]['phoneno'];?></td><td><a href='<?php echo base_url();?>home/deleteuser/<?php echo $user[0]['id'];?>'><span style="color:red">Delete</span></a></td></tr><?php } 
+	else{
+	
+	foreach($user as $row){
+     
+  
+	?>
+	<tr><td><?php echo $row['lname'];?></td><td><?php echo $row['email'];?></td><td><?php echo $row['phoneno'];?></td><td><a href='<?php echo base_url();?>home/deleteuser/<?php echo $row['id'];?>'><span ">Delete</span></a></td></tr><?php } }?>
+		</table>
+		
+		
 
     
     <section id="bottom" class="wet-asphalt">

@@ -89,46 +89,47 @@ if(!$sess_data){
 <?php $id=$sess_data['id'];?>
 <form action="<?php echo base_url();?>home/getprofile" method="post" name="edit">
 <table>
-<td>FIRST NAME</td>
-<td><input type="text" name="First_Name" maxlength="30" value="<?php echo $res[0]['fname'];?>"/>
+<input type="hidden" name="id" id="id" maxlength="30" value="<?php echo $res[0]['id'];?>"/>
+<td><label>FIRST NAME</label></td>
+<td><input type="text" name="fname" maxlength="30" value="<?php echo $res[0]['fname'];?>"/>
 (max 30 characters a-z and A-Z)
 </td>
 </tr>
  
 <!----- Last Name ---------------------------------------------------------->
 <tr>
-<td>LAST NAME</td>
-<td><input type="text" name="Last_Name" maxlength="30" value="<?php echo $res[0]['lname'];?>"/>
+<td><label>LAST NAME</label></td>
+<td><input type="text" name="lname" maxlength="30" value="<?php echo $res[0]['lname'];?>"/>
 (max 30 characters a-z and A-Z)
 </td>
 </tr>
 <tr>
-<td>EMAIL ID</td>
-<td><input type="text" name="Email_Id" maxlength="100" value="<?php echo $res[0]['email'];?>"/></td>
+<td><label>EMAIL ID</label></td>
+<td><input type="text" name="email" maxlength="100" value="<?php echo $res[0]['email'];?>"/></td>
 </tr>
  
 <!----- Mobile Number ---------------------------------------------------------->
 <tr>
-<td>MOBILE NUMBER</td>
+<td><label>MOBILE NUMBER</label></td>
 <td>
-<input type="text" name="Mobile_Number" maxlength="10" value="<?php echo $res[0]['phoneno'];?>"/>
+<input type="text" name="phno" maxlength="10" value="<?php echo $res[0]['phoneno'];?>"/>
 (10 digit number)
 </td>
 </tr>
 <tr>
-<td>ENTER OLDPASSWORD</td>
+<td><label>ENTER OLDPASSWORD</label></td>
 <td><input type="password" name="opwd" id="opwd" maxlength="30" onkeyup="kiran()"/><h5 style="color:#F00;" id="old"></h5>
 (max 8 characters a-z and A-Z)
 </td>
 </tr>
 <tr>
-<td>ENTER NEWPASSWORD</td>
+<td><label>ENTER NEWPASSWORD</label></td>
 <td><input type="password" name="npwd" maxlength="30"/>
 (max 8 characters a-z and A-Z)
 </td>
 </tr>
 <tr>
-<td>CONFORM NEWPASSWORD</td>
+<td><label>CONFORM NEWPASSWORD</label></td>
 <td><input type="password" name="rpwd" maxlength="30"/>
 (max 8 characters a-z and A-Z)
 </td>

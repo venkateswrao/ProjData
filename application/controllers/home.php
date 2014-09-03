@@ -98,4 +98,22 @@ function index(){
  		$d1['res']=$this->user_model->edit_profile($id);
  		$this->load->view('profile',$d1);
  	}
+ 	function getprofile(){
+  $q=$this->user_model->edit_user();
+  if($q){
+  	$this->load->view('userdashboard');
+  }
+ 	}
+ 	function user($id){
+ 		$q['user']=$this->user_model->user($id);
+ 		$this->load->view('displayuser',$q);
+ 	}
+ 	function deleteuser($id){
+ 		$q=$this->user_model->delete_user($id);
+ 		if($q){
+ 			$this->session->sess_destroy();
+ 			
+ 			redirect('home','refresh');
+ 		}
+ 	}
 }
