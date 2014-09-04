@@ -52,7 +52,10 @@ function index(){
  		else{
  		$data1=array('upload_data'=>$this->upload->data());
  		
- 		 $data['pic']=$data1['upload_data']['full_path'];
+ 		$data['pic'] = 'http://localhost/CIexample/uploads/'.$data1['upload_data']['orig_name'];
+ 		
+ 		
+ 		 
  		
  		}
  	$query=$this->user_model->add_users($data);
@@ -108,6 +111,9 @@ function index(){
  		$q['user']=$this->user_model->user($id);
  		$this->load->view('displayuser',$q);
  	}
+ 	function dashboard(){
+ 		$this->load->view('userdashboard');
+ 	}
  	function deleteuser($id){
  		$q=$this->user_model->delete_user($id);
  		if($q){
@@ -115,5 +121,15 @@ function index(){
  			
  			redirect('home','refresh');
  		}
+ 	}
+ 	function search(){
+ 		$this->load->view('search');
+ 	}
+ 	function searchdetails(){
+ 		$serch['lname']=$this->input->post('lname');
+ 		$serch['location']=$this->input->post('city');
+ 		$serch['fname']=$this->input->post('fname');
+ 		$q['res']=$this->user_model->getdata($serch);
+ 		$this->load->view('searchdata',$q);
  	}
 }

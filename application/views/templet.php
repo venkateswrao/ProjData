@@ -38,7 +38,7 @@
                     <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
                     <li><a href="<?php echo base_url();?>home/registration">Sign_up</a></li>
                     <li><a href="<?php echo base_url();?>home/log_in">Login</a></li>
-                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="<?php echo base_url();?>home/search">Search</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="icon-angle-down"></i></a>
                         <ul class="dropdown-menu">

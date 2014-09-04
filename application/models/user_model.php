@@ -59,4 +59,18 @@ function delete_user($id){
 	$rq=$this->db->delete('cust_data',array('id'=>$id));
 	return true;
 }
+function getdata($serch){
+	if(isset($serch['fname']) && ($serch['location'])&&($serch['lname'])){
+		$query=$this->db->get_where('cust_data',array('fname'=>$serch['fname'],'lname'=>$serch['lname'],'location'=>$serch['location']));
+	}else
+	 {
+		$this->db->where('fname=',$serch['fname']);
+		$this->db->or_where('lname=',$serch['lname']);
+		$this->db->or_where('location=',$serch['location']);
+		$query=$this->db->get('cust_data');
+		
+	}
+	$f=$query->result_array();
+	return $f;
+}
 }

@@ -47,7 +47,7 @@ if(!$sess_data){
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                 <?php if($sess_data['id']){?>
-		   <li class='active'><a href='<?php echo base_url();?>home/dashboard'><span><?php echo $sess_data['fname']."'s "."Dashboard";?></span></a>
+		   <li class='active'><a href='<?php echo base_url();?>home/dashboard'><span style="color: red"><?php echo $sess_data['fname']."'s "."Dashboard";?></span></a>
                                    <?php }else {?>
                    </li>
                   <li class='active'><a href='<?php echo base_url();?>home'><span>Signup</span></a>                   

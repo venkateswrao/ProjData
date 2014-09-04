@@ -48,7 +48,7 @@ if(!$sess_data){
                 <ul class="nav navbar-nav navbar-right">
                 <?php if($sess_data['id'])
                { $id=$sess_data['id'];?>
-		   <li class='active'><a href='<?php echo base_url();?>home/dashboard'><span><?php echo $sess_data['fname']."'s "."Dashboard";?></span></a>
+		   <li class='active'><a href='<?php echo base_url();?>home/dashboard'><span ><?php echo $sess_data['fname']."'s "."Dashboard";?></span></a>
                                    <?php }else {?>
                    </li>
                   <li class='active'><a href='<?php echo base_url();?>home'><span>Signup</span></a>                   
@@ -79,7 +79,7 @@ if(!$sess_data){
                 <div class="col-sm-6">
                     <ul class="breadcrumb pull-right">
                         
-		<?php echo "Welcome_". $sess_data['fname'];;?>
+		<span style="color: red"><?php echo "Welcome_". $sess_data['fname'];;?></span>
 		<a href='<?php echo base_url();?>home/editprofile/<?php echo $id;?>'><span>Edit Profile</span></a>
 	</div>
                     </ul>
